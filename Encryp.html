@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shift Chiper</title>
+    <link rel="stylesheet" href="/encryp.css">
+</head>
+<body>
+    <div class="list">
+        <a href="/Encryp.html">enkripsi</a>
+        <a href="/decryp.html">Dekripsi</a>
+    </div>
+    <div class="container">
+        <h1>Shift Chiper</h1>
+        <div class="enkripsi">
+            <div class="text">
+            <label for="plain">MASUKAN PLAIN TEXT</label>
+            <input type="text" id="plain" placeholder="kata/kalimat huruf" maxlength="60" required>    
+            <datalist id="options">
+            </datalist>
+            </div>
+            <div class="kunci">
+            <label for="kunci">MASUKAN KUNCI</label>
+            <input type="text" id="kunci" placeholder="bilangan bulat" required>    
+            <datalist id="options">
+            </datalist>
+        </div>
+            <button id="tombol" type="submit" onclick="shiftCipherEncrypt()">ENKRIPSI</button>
+        </div>
+        <div id="hasil">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
