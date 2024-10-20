@@ -7,24 +7,24 @@
     <link rel="stylesheet" href="/encryp.css">
 </head>
 <body>
-    <div class="list">
-        <a href="/Encryp.html">enkripsi</a>
-        <a href="/decryp.html">Dekripsi</a>
-    </div>
     <div class="container">
+        <div class="list">
+            <a href="/Encryp.html">ENKRIPSI</a>
+            <a href="/decryp.html">DEKRIPSI</a>
+        </div>
         <h1>Shift Chiper</h1>
         <div class="enkripsi">
             <div class="text">
             <label for="plain">MASUKAN PLAIN TEXT</label>
-            <input type="text" id="plain" placeholder="kata/kalimat huruf" maxlength="60" required>    
+            <input type="text" id="plain" placeholder="kata/kalimat huruf" maxlength="180" required>    
             </div>
             <div class="kunci">
             <label for="kunci">MASUKAN KUNCI</label>
             <input type="text" id="kunci" placeholder="bilangan bulat" required>    
-        </div>
+            </div>
             <button id="tombol" type="submit" onclick="shiftCipherEncrypt()">ENKRIPSI</button>
+            <div id="hasil" class="hasil"></div>
         </div>
-        <div id="hasil"></div>
     </div>
     <script src="/encryp.js"></script>
 </body>

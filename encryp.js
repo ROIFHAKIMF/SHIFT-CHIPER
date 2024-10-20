@@ -73,28 +73,35 @@ function shiftCipherEncrypt() {
 
 const inputElement = document.getElementById("plain");
 const kunciElement = document.getElementById("kunci");
-const buttonElement = document.getElementById("tombol")
+const buttonElement = document.getElementById("tombol");
+const hasilElement = document.getElementById("hasil");
 // Fungsi untuk menangani klik pada input
 function toggleInputStyle() {
-    inputElement.classList.add("clicked")
-    setTimeout(()=>{
+    if(inputElement.value !== "") {
+        inputElement.classList.add("clicked");
+    } else {
+        // Jika input kosong, hapus class .clicked
         inputElement.classList.remove("clicked");
-    },1000); // Tambahkan atau hapus kelas "clicked"
+    }
+    // Tambahkan atau hapus kelas "clicked"
 }
+inputElement.addEventListener('input',toggleInputStyle)
 function togglekunciStyle() {
-    kunciElement.classList.add("clicked")
-    setTimeout(()=>{
+    if(kunciElement.value !== "") {
+        kunciElement.classList.add("clicked");
+    } else {
+        // Jika input kosong, hapus class .clicked
         kunciElement.classList.remove("clicked");
-    },1000); // Tambahkan atau hapus kelas "clicked"
+    }
+    // Tambahkan atau hapus kelas "clicked"
 }
-// Tambahkan event listener unuk menangani klik
-inputElement.addEventListener("click", toggleInputStyle);
-kunciElement.addEventListener("click", togglekunciStyle);
+kunciElement.addEventListener('input',togglekunciStyle)
+
 
 function buttonclick(){
     buttonElement.classList.add("clicked")
     setTimeout(()=>{
         buttonElement.classList.remove("clicked");
-    },800);
+    },300);
 }
 buttonElement.addEventListener('click',buttonclick);

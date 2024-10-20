@@ -1,67 +1,127 @@
 // Frekuensi huruf paling umum dalam bahasa Inggris
-const englishLetterFrequency = ['E', 'T', 'A', 'O', 'I', 'N', 'S', 'H', 'R', 'D', 'L', 'C', 'U', 'M', 'W', 'F', 'G', 'Y', 'P', 'B', 'V', 'K', 'J', 'X', 'Q', 'Z'];
+function listeglishletter() {
+    const englishLetterFrequency = {
+        'E': 12.70, 'T': 9.06, 'A': 8.17, 'O': 7.51, 'I': 6.97, 'N': 6.75,
+        'S': 6.33, 'H': 6.09, 'R': 5.99, 'D': 4.25, 'L': 4.03, 'C': 2.78,
+        'U': 2.76, 'M': 2.41, 'W': 2.36, 'F': 2.23, 'G': 2.02, 'Y': 1.97,
+        'P': 1.93, 'B': 1.29, 'V': 0.98, 'K': 0.77, 'X': 0.15, 'J': 0.15,
+        'Q': 0.10, 'Z': 0.07
+    };
 
-// Fungsi untuk menghitung frekuensi huruf dalam teks cipher
-function calculateFrequency(text) {
-    let frequency = {};
-    for (let char of text) {
-        char = char.toUpperCase();
-        if (char >= 'A' && char <= 'Z') {
-            frequency[char] = (frequency[char] || 0) + 1;
-        }
+    let result = "Frekuensi huruf dalam bahasa Inggris standar:<br>";
+    for (let letter in englishLetterFrequency) {
+        result += `Huruf ${letter}: ${englishLetterFrequency[letter]}%<br>`;
     }
-    return frequency;
+    document.getElementById("english-freq").innerHTML = result;
+
+    displayChart2(englishLetterFrequency);
 }
 
-// Fungsi untuk mengurutkan huruf berdasarkan frekuensi kemunculan
-function sortFrequency(frequency) {
-    let sorted = Object.keys(frequency).sort((a, b) => frequency[b] - frequency[a]);
-    return sorted;
-}
-
-// Fungsi dekripsi menggunakan analisis frekuensi dan menampilkan beberapa hasil yang mungkin
-function shiftCipherDecryptWithFrequencyAnalysis() {
-    let ciphertext = document.getElementById("chiper").value.trim();
-
-    if (ciphertext === "") {
-        document.getElementById("hasil").innerHTML = "Teks tidak boleh kosong.";
+function Listchiperletter() {
+    let chipertext = document.getElementById("chiper").value.trim().toUpperCase();
+    if (chipertext === "") {
+        document.getElementById('hasil').innerHTML = "Input tidak boleh kosong";
         return;
     }
 
-    // Hitung frekuensi huruf dalam teks cipher
-    let frequency = calculateFrequency(ciphertext);
-    console.log("Frekuensi:", frequency);
+    let letterCount = {};
+    let totalLetters = 0;
 
-    // Urutkan huruf berdasarkan frekuensi kemunculan
-    let sortedChars = sortFrequency(frequency);
-    console.log("Huruf terurut berdasarkan frekuensi:", sortedChars);
-
-    // Tampilkan beberapa hasil dekripsi
-    let possibleDecryptions = '';
-
-    // Coba beberapa huruf yang sering muncul (misalnya bandingkan dengan 'E', 'T', 'A', dll.)
-    for (let assumedChar of englishLetterFrequency.slice(0, 5)) { // Coba 5 huruf paling umum dalam bahasa Inggris
-        let mostFrequentChar = sortedChars[0]; // Huruf paling sering muncul di cipher
-        let key = (mostFrequentChar.charCodeAt(0) - assumedChar.charCodeAt(0) + 26) % 26;
-
-        let decryptedText = '';
-        for (let i = 0; i < ciphertext.length; i++) {
-            let char = ciphertext[i];
-
-            if (char >= 'A' && char <= 'Z') {
-                let newChar = String.fromCharCode(((char.charCodeAt(0) - 65 - key + 26) % 26) + 65);
-                decryptedText += newChar;
-            } else if (char >= 'a' && char <= 'z') {
-                let newChar = String.fromCharCode(((char.charCodeAt(0) - 97 - key + 26) % 26) + 97);
-                decryptedText += newChar;
-            } else {
-                decryptedText += char; // Karakter lain tidak diubah
-            }
+    // Hitung frekuensi kemunculan huruf dalam ciphertext
+    for (let char of chipertext) {
+        if (char >= 'A' && char <= 'Z') {
+            letterCount[char] = (letterCount[char] || 0) + 1;
+            totalLetters++;
         }
-
-        possibleDecryptions += `Asumsi '${assumedChar}' adalah huruf paling umum, kunci: ${key} -> ${decryptedText}<br>`;
     }
 
-    // Tampilkan hasil dekripsi yang memungkinkan
-    document.getElementById("hasil").innerHTML = possibleDecryptions;
+    // Daftar lengkap huruf alfabet
+    let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let letterFrequencies = {};
+
+    // Inisialisasi frekuensi huruf menjadi 0 jika tidak ditemukan di ciphertext
+    for (let letter of alphabet) {
+        if (letter in letterCount) {
+            letterFrequencies[letter] = (letterCount[letter] / totalLetters) * 100;
+        } else {
+            letterFrequencies[letter] = 0;
+        }
+    }
+
+    // Urutkan huruf berdasarkan frekuensi tertinggi
+    let sortedFrequencies = Object.keys(letterFrequencies).sort((a, b) => letterFrequencies[b] - letterFrequencies[a]);
+
+    let result = 'Frekuensi huruf dalam cipher text:<br>';
+    for (let letter of sortedFrequencies) {
+        result += 'Huruf ' + letter + ': ' + letterFrequencies[letter].toFixed(2) + '%<br>';
+    }
+
+    document.getElementById('hasil').innerHTML = result;
+
+    // Tampilkan chart
+    displayChart1(letterFrequencies);
+}
+
+function displayChart1(letterFrequencies) {
+    const ctx1 = document.getElementById('Chartchiper').getContext('2d');
+    
+    // Daftar lengkap huruf alfabet (A-Z)
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+    
+    // Buat array nilai frekuensi dengan urutan alfabet, termasuk 0 untuk huruf yang tidak ada
+    const data1 = alphabet.map(letter => letterFrequencies[letter] || 0);
+    
+    const Chartchiper = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: alphabet,  // Tampilkan semua huruf A-Z sebagai label
+            datasets: [{
+                label: 'Frekuensi Huruf Cipher Text (%)',
+                data: data1,  // Data dari frekuensi huruf, 0 jika tidak ada
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+    });
+}
+
+function displayChart2(englishLetterFrequency) {
+    const ctx2 = document.getElementById('Chartenglish').getContext('2d');
+    const labels2 = Object.keys(englishLetterFrequency);
+    const data2 = Object.values(englishLetterFrequency);
+
+    const Chartenglish = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: labels2,
+            datasets: [{
+                label: 'Frekuensi Huruf (%)',
+                data: data2,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+    });
+}
+
+// Fungsi untuk memanggil dua analisis sekaligus
+function decryption() {
+    listeglishletter(); // Frekuensi huruf bahasa Inggris
+    Listchiperletter(); // Analisis huruf cipher text
 }
