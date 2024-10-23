@@ -1,3 +1,8 @@
+document.getElementById("chiper").addEventListener("input", function(event) {
+    let input = event.target.value;
+    event.target.value = input.replace(/[^a-zA-Z\s]/, '');
+});
+
 function decryptUsingFrequencyAnalysis() {
     let chipertext = document.getElementById("chiper").value.trim().toUpperCase();
     if (chipertext === "") {
@@ -61,14 +66,17 @@ function listeglishletter() {
         'P': 1.93, 'B': 1.29, 'V': 0.98, 'K': 0.77, 'X': 0.15, 'J': 0.15,
         'Q': 0.10, 'Z': 0.07
     };
-
+    let chipertext = document.getElementById("chiper").value.trim().toUpperCase();
+    if (chipertext === "") {
+        document.getElementById('hasil').innerHTML = "Input tidak boleh kosong";
+        return;
+    }
     let result = "Frekuensi huruf dalam bahasa Inggris standar:<br>";
     for (let letter in englishLetterFrequency) {
         result += `Huruf ${letter}: ${englishLetterFrequency[letter]}%<br>`;
     }
     document.getElementById("english-freq").innerHTML = result;
-
-    displayChart2(englishLetterFrequency);
+        displayChart2(englishLetterFrequency);
 }
 
 function Listchiperletter() {
@@ -113,15 +121,14 @@ function Listchiperletter() {
     document.getElementById('cipher-freq').innerHTML = result;
 
     // Tampilkan chart
-    displayChart1(letterFrequencies);
+        displayChart1(letterFrequencies);
 }
 
 function displayChart1(letterFrequencies) {
-    const ctx1 = document.getElementById('Chartchiper').getContext('2d');
     
+    const ctx1 = document.getElementById('Chartchiper').getContext('2d');
     // Daftar lengkap huruf alfabet (A-Z)
     let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
-    
     // Buat array objek berisi huruf dan frekuensi
     let frequencyArray = alphabet.map(letter => {
         return {
@@ -144,12 +151,16 @@ function displayChart1(letterFrequencies) {
             datasets: [{
                 label: 'Frekuensi Huruf Cipher Text (%)',
                 data: sortedFrequencies,  // Data frekuensi yang sudah diurutkan
-                backgroundColor: 'rgba(58,90,121,0.5)',
+                backgroundColor: 'rgba(58,90,121,0.8)',
                 borderColor: 'rgba(5, 5, 66, 1)',
                 borderWidth: 1
             }]
         },
         options: {
+            plugins: {
+                // Plugin untuk mengubah warna background
+                backgroundColor: 'rgba(220, 220, 220, 0.5)'  // Warna background chart
+            },
             scales: {
                 y: {
                     beginAtZero: true,
@@ -173,12 +184,16 @@ function displayChart2(englishLetterFrequency) {
             datasets: [{
                 label: 'Frekuensi Huruf (%)',
                 data: data2,
-                backgroundColor: 'rgba(58,90,121,0.5)',
+                backgroundColor: 'rgba(58,90,121,0.8)',
                 borderColor: 'rgba(5, 5, 66, 1)',
                 borderWidth: 1
             }]
         },
         options: {
+            plugins: {
+                // Plugin untuk mengubah warna background
+                backgroundColor: 'rgba(220, 220, 220, 0.5)'  // Warna background chart
+            },
             scales: {
                 y: {
                     beginAtZero: true,
@@ -191,7 +206,37 @@ function displayChart2(englishLetterFrequency) {
 
 // Fungsi untuk memanggil dua analisis sekaligus
 function decryption() {
-    Listchiperletter(); // Analisis huruf cipher text
-    listeglishletter(); // Frekuensi huruf bahasa Inggris
-    decryptUsingFrequencyAnalysis();
+    let chipertext = document.getElementById("chiper").value.trim().toUpperCase();
+    if (chipertext === "") {
+        document.getElementById('hasil').innerHTML = "Input tidak boleh kosong";
+        document.getElementById('english-freq').innerHTML = "";
+        document.getElementById('cipher-freq').innerHTML = "";
+        toggleStyle();
+        return;
+    }else{
+        Listchiperletter(); // Analisis huruf cipher text
+        listeglishletter(); // Frekuensi huruf bahasa Inggris
+        decryptUsingFrequencyAnalysis();
+    }
+}
+
+const buttonElement = document.getElementById("tombol");
+
+function buttonclick(){
+    buttonElement.classList.add("clicked")
+    setTimeout(()=>{
+        buttonElement.classList.remove("clicked");
+    },300);
+}
+buttonElement.addEventListener('click',buttonclick);
+
+const chartElement = document.getElementsByClassName("output");
+function toggleStyle() {
+    if(chartElement !== "") {
+        chartElement.classList.add("clicked");
+    } else {
+        // Jika input kosong, hapus class .clicked
+        chartElement.classList.remove("clicked");
+    }
+    // Tambahkan atau hapus kelas "clicked"
 }

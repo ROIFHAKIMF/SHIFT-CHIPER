@@ -19,7 +19,7 @@
                 <label for="chiper">MASUKAN KATA</label>
                 <textarea id="chiper" placeholder="masukan huruf" required rows="4"></textarea>
             </div>
-            <button type="submit" id="tombol1" onclick="decryption()">DEKRIPSI</button>
+            <button type="submit" id="tombol" onclick="decryption()">DEKRIPSI</button>
         </div>
         <div class="output">
             <div id="hasil"></div>
@@ -27,12 +27,12 @@
                 <div id="cipher-freq"></div>
                 <div id="english-freq"></div>
             </div>
-            <div class="all-chart">
-                <div class="chartchiper">
-                    <canvas id="Chartenglish" width="800" height="300"></canvas>
+            <div id="all-chart">
+                <div id="chartchiper">
+                    <canvas id="Chartenglish" width="1100" height="500"></canvas>
                 </div>
-                <div class="chartenglish">
-                    <canvas id="Chartchiper" width="800" height="300"></canvas>
+                <div id="chartenglish">
+                    <canvas id="Chartchiper" width="1100" height="500"></canvas>
                 </div>
             </div>
         </div>
