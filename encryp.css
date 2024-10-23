@@ -1,7 +1,7 @@
 body{
     margin: 0;
     padding: 0;
-    background-image: url(/starry-sky-night-with-landscape-mountains.jpg);
+    background-image: url(./starry-sky-night-with-landscape-mountains.jpg);
     background-size:cover;
     color: white;
     font-family: monospace;
