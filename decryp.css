@@ -1,124 +1,26 @@
 body{
     margin: 0;
     padding: 0;
-    background-image: url(./starry-sky-night-with-landscape-mountains.jpg);
-    color: white;
-    width: auto;
-    height: auto;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-color: black;
-    font-family: monospace;
+    letter-spacing: 2px !important;
+    scroll-behavior: smooth;
 }
-.list{
-    z-index: 9999;
-    position: relative;
-    align-self: flex-start;
-    top: 0;
-    font-size: 1.5rem;
-}
-.list a{
-    text-decoration: none;
-    color: white;
-}
-
-.container{
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%,rgb(0,0,0)80%);
-    width: 100%;
-    min-height: 100vh;
-    height: auto;
-    position: relative;
-    top: 0;
-    display: flex;
-    gap: 20px;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    font-size: 1.5rem;
-}
-.container h1{
-    text-transform: uppercase;
-}
-
-.container .dekripsi{
-    background-color: rgba(144, 232, 242, 0.258);
-    border: 5px solid rgb(27, 42, 73);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    width: 80%;
-    backdrop-filter: blur(5px);
-    height: 8%;
-    font-size: 1.5rem;
-    padding: 20px;
+.active{
+    background-color: #0DCAF0 !important;
     border-radius: 50px;
-    gap: 20px;
+    padding: 2px 10px !important;
 }
-.container .dekripsi .text{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
+.hal1{
+    background-color: #3A4A5A; /* Biru abu-abu yang lembut */
+    min-height: 100vh;
 }
 
-.container .dekripsi .text textarea{
-    width: 100%;
-    text-indent: 15px;
-    border-radius: 25px;
-    border: 3px solid rgb(58,90,121) ;
-    outline: 2px solid rgb(58,90,121);
-    background-color: rgba(0, 0, 0, 0.512);
-    color: white;
-    font-size: 1rem;
+.dekripsi{
+    width: 90% !important;
 }
-#chiper{
-    resize: none;
-}
-
 .output{
-    display: flex;
-    font-size: 1rem;
-    flex-direction: column;
-    height: auto;
-    width: 75%;
-    background-color: rgba(144, 232, 242, 0.258);
-    padding: 2% 4%;
-    backdrop-filter: blur(5px);
-    border-radius: 50px; 
-    border: 3px solid rgb(5, 5, 66);
-}
-.output .list-huruf{
-    display: flex;
-    gap: 50px;
+    width: 90% !important;
 }
 
-
-.container .dekripsi button{
-    width: 90%;
-    border-radius: 20px;
-    border: 2px solid rgb(5, 5, 66);
-    background-color: rgb(58,90,121);
-    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.17);
-    height: 40px;
-    color: rgb(255, 255, 255);    -webkit-text-stroke: 1px rgb(5, 5, 66);
-    font-weight: 900;
-    letter-spacing: 10px;
-    font-size: 1.2rem;
-}
-#all-chart{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: auto;
-    height: auto;
-}
-.container .dekripsi button.clicked{
-    border: 4px solid rgb(27, 42, 73);
-    transform: scale(0.97);
-}
-
-.container .output.clicked{
-    display: flex;
+#Chartchiper, #Chartenglish , #Chartindo, #indo-freq, #english-freq{
+    display: none; /* Sembunyikan grafik saat awal */
 }
