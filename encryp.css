@@ -10,6 +10,10 @@ body{
     padding: 2px 10px !important;
 }
 
+.navbar{
+    z-index: 999;
+}
+
 .hal1{
     background-color: #3A4A5A; /* Biru abu-abu yang lembut */
     min-height: 100vh;
